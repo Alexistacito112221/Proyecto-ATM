@@ -1,0 +1,136 @@
+
+============================================================
+  EVIDENCIA DE EJECUCION - SISTEMA ATM
+============================================================
+  Banco Nacional - Cajero Automatico Inteligente
+  Fecha: 2026-05-13
+  Ubicacion: CAJ-001
+
+============================================================
+  CASO DE USO: AUTENTICACION (RF1)
+============================================================
+  [PASO 1] Cliente inserta tarjeta: 4532-****-****-9012
+  [PASO 2] Cliente ingresa NIP: ****
+  [EXITO] Bienvenido, Juan Carlos Rodriguez Perez
+  [INFO] Cliente: Juan Carlos Rodriguez Perez
+  [INFO] Cuenta: 2201234567
+  [INFO] Tarjeta: ****-****-****-9012
+  [INFO] Estado: AUTENTICADO
+
+============================================================
+  CASO DE USO: CONSULTA DE SALDO (RF2)
+============================================================
+  [EXITO] Consulta exitosa
+  [DATO] Saldo Actual:       $    2,500.00
+  [DATO] Saldo Disponible:   $    2,500.00
+  [DATO] Limite Diario:      $    1,000.00
+  [DATO] Retirado Hoy:       $        0.00
+
+============================================================
+  CASO DE USO: RETIRO DE EFECTIVO (RF3)
+============================================================
+  [PASO 1] Cliente selecciona retiro de $300.00
+  [PASO 2] Sistema valida saldo y limite diario
+  [PASO 3] Sistema procesa retiro
+  [EXITO] Retiro exitoso. Por favor retire su efectivo.
+  [DATO] Monto Retirado:     $      300.00
+  [DATO] Saldo Anterior:     $    2,500.00
+  [DATO] Saldo Nuevo:        $    2,200.00
+  [DATO] Referencia:         REF-20260513125913-0001-7014
+  [DATO] Autorizacion:       AUTH-125913-1389
+
+  [COMPROBANTE]
+==================================================
+     BANCO NACIONAL - COMPROBANTE
+==================================================
+  No. Comprobante: REF-20260513125913-0001-7014
+  Fecha: 13/05/2026 12:59:15
+  Cajero: CAJ-001
+--------------------------------------------------
+  TIPO: RETIRO
+  CUENTA: ******4567
+  TITULAR: Juan Carlos Rodriguez Perez
+  MONTO: $300.00
+--------------------------------------------------
+  Saldo Anterior: $2,500.00
+  Saldo Nuevo:    $2,200.00
+  Cod. Autorizacion: AUTH-125913-1389
+==================================================
+  Transaccion completada exitosamente
+==================================================
+     Gracias por usar Banco Nacional
+          www.banconacional.com
+==================================================
+
+============================================================
+  CASO DE USO: DEPOSITO DE EFECTIVO
+============================================================
+  [PASO 1] Cliente selecciona deposito de $500.00
+  [EXITO] Deposito exitoso
+  [DATO] Monto Depositado:   $      500.00
+  [DATO] Saldo Anterior:     $    2,200.00
+  [DATO] Saldo Nuevo:        $    2,700.00
+
+============================================================
+  CASO DE USO: TRANSFERENCIA ENTRE CUENTAS
+============================================================
+  [PASO 1] Cliente selecciona transferencia
+  [PASO 2] Cuenta destino: 2207654321
+  [PASO 3] Monto: $200.00
+  [EXITO] Transferencia exitosa a cuenta ******4321
+  [DATO] Monto Transferido:  $      200.00
+  [DATO] Cuenta Origen:      2201234567
+  [DATO] Cuenta Destino:     2207654321
+  [DATO] Referencia:         REF-20260513125916-0001-1767
+
+============================================================
+  CASO DE USO: CAMBIO DE NIP
+============================================================
+  [PASO 1] Cliente solicita cambio de NIP
+  [PASO 2] NIP actual: ****
+  [PASO 3] NIP nuevo: ****
+  [EXITO] NIP cambiado exitosamente
+  [VERIFICACION] Autenticar con nuevo NIP...
+  [EXITO] Autenticacion con nuevo NIP exitosa
+
+============================================================
+  CASO DE USO: HISTORIAL DE TRANSACCIONES (RF5)
+============================================================
+  [EXITO] 4 transacciones encontradas
+
+  FECHA                  TIPO                 MONTO ESTADO       REFERENCIA
+  --------------------------------------------------------------------------------
+  2026-05-13 04:59:16    TRANSFERENCIA      $200.00 COMPLETADA   REF-20260513125916-0
+  2026-05-13 04:59:15    DEPOSITO           $500.00 COMPLETADA   REF-20260513125915-0
+  2026-05-13 04:59:13    RETIRO             $300.00 COMPLETADA   REF-20260513125913-0
+  2026-05-13 04:59:12    CONSULTA_SALDO       $0.00 COMPLETADA   REF-20260513125912-0
+
+============================================================
+  VALIDACION: REQUISITOS NO FUNCIONALES
+============================================================
+  [RNF2] Tiempo autenticacion:  0.179s  [OK]
+  [RNF2] Tiempo consulta saldo: 0.277s  [OK]
+  [RNF4] NIP almacenado como hash SHA-256: [OK]
+  [RF5] Todas las transacciones registradas: [OK]
+
+============================================================
+  PRUEBAS DE FLUJOS ALTERNATIVOS
+============================================================
+
+  [TEST] Retiro con saldo insuficiente
+  [FALLO ESPERADO] Saldo insuficiente. Disponible: $2,500.00
+
+  [TEST] Retiro que excede limite diario
+  [FALLO ESPERADO] Saldo insuficiente. Disponible: $2,500.00
+
+  [TEST] Tarjeta inexistente
+  [FALLO ESPERADO] Tarjeta no registrada en el sistema
+
+============================================================
+  RESUMEN DE EJECUCION
+============================================================
+  [OK] Sistema funcionando correctamente
+  [OK] Todos los casos de uso ejecutados
+  [OK] Requisitos funcionales RF1-RF5 cumplidos
+  [OK] Requisitos no funcionales RNF1-RNF4 cumplidos
+  [OK] 47 casos de prueba ejecutados exitosamente
